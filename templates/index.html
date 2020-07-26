@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+</head>
+<body>
+  <div id="'myElement"> 
+    <table id="store">
+      <tr>
+        <th>Store Name</th>
+        <th>Items</th>
+        <th>Price</th>
+      </tr>
+      
+    </table>
+  </div>
+</body>
+<script type="text/javascript">
+    function getStores(url, callback) {
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.onreadystatechange = function(){
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+          callback(xmlHttp.responseText);
+        }
+      };
+      xmlHttp.open('GET', url, true);
+      xmlHttp.send(null);
+    }
+
+    getStores('http://127.0.0.1:5000/store', function(response) {
+      alert(response);
+    });
+  </script>
+</html>
