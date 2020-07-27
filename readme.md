@@ -13,3 +13,8 @@ git clone https://github.com/anusreesubash/python-flask-learning.git
 ```bash
 pip install -r requirements.txt
 ```
+
+## Run
+```bash
+python app.py
+```

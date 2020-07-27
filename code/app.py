@@ -10,7 +10,12 @@ api = Api(app)
 
 jwt = JWT(app, authenticate, identity)
 
-items = []
+items = [
+{
+  'name': 'chair',
+  'price': 56
+}
+]
 
 class Item(Resource):
   parser = reqparse.RequestParser()
@@ -31,8 +36,6 @@ class Item(Resource):
     return {'message': 'item deleted'}
 
   def put(self, name):
-    
-
     item = next(filter(lambda x: x['name'] == name,items), None)
     if item == None:
       item = {'name': name, 'price': data['price']}
@@ -42,7 +45,6 @@ class Item(Resource):
     return item
 
   def post(self, name):
-
     if next(filter(lambda x: x['name'] == name, items), None):
       return {'message': 'This item already exists'.format(name)}
     data = Item.parser.parse_args()

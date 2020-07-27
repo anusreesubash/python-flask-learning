@@ -65,7 +65,7 @@ def create_item_in_store(name):
       store['items'].append(new_item)
       return jsonify(new_item)
 
-    return jsonify({'message': 'store not found'})
+  return jsonify({'message': 'store not found'})
 
 
 # get/store/<string:name>/item
@@ -76,6 +76,16 @@ def get_items_in_store(name):
       return jsonify({'items': store['items']})
     
     return jsonify({'message':'store not found'})
+
+# delete/store/<string:name>
+@app.route('/store/<string:name>', methods=['DELETE'])
+def delete_store(name):
+  global stores
+  store = next((x for x in stores if x['name'] == name), None)
+  if store == None:
+    return jsonify({'message':"store not found"})
+  stores = list(filter(lambda x: x['name'] != name, stores))
+  return jsonify({'message':'store deleted'})
 
 
 #tell app to run
